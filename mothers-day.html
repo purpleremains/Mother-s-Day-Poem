@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>For Mom</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Pinyon+Script&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg1:#fff3f6;--bg2:#f6d3e0;--bg3:#e9b4cf;
+  --ink:#4b1d3a;--soft:#7d4a68;--accent:#c42d6b;--gold:#a8741a;
+  --card:rgba(255,255,255,.62);--glow:rgba(196,45,107,.28);
+  color-scheme:light;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg1:#2b0f26;--bg2:#1b0818;--bg3:#0f040e;
+    --ink:#fde9f1;--soft:#d7a9c3;--accent:#ff7fae;--gold:#f2c66d;
+    --card:rgba(255,255,255,.07);--glow:rgba(255,127,174,.35);
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg1:#2b0f26;--bg2:#1b0818;--bg3:#0f040e;
+  --ink:#fde9f1;--soft:#d7a9c3;--accent:#ff7fae;--gold:#f2c66d;
+  --card:rgba(255,255,255,.07);--glow:rgba(255,127,174,.35);
+  color-scheme:dark;
+}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+html,body{height:100%;margin:0}
+body{
+  background:radial-gradient(120% 90% at 50% 20%,var(--bg1),var(--bg2) 55%,var(--bg3));
+  color:var(--ink);font-family:"Cormorant Garamond",Georgia,"Times New Roman",serif;
+  overflow:hidden;
+}
+#petals{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:1}
+.scene{
+  position:absolute;inset:0;z-index:2;display:flex;flex-direction:column;align-items:center;justify-content:center;
+  text-align:center;padding:24px;opacity:0;visibility:hidden;transition:opacity 1.2s ease,visibility 0s 1.2s;
+}
+.scene.on{opacity:1;visibility:visible;transition:opacity 1.2s ease}
+button{
+  font:600 1.25rem "Cormorant Garamond",Georgia,serif;color:var(--ink);cursor:pointer;
+  background:var(--card);border:1.5px solid var(--accent);border-radius:999px;padding:.7em 2em;
+  backdrop-filter:blur(8px);transition:transform .25s,box-shadow .25s;
+}
+button:hover{transform:scale(1.06);box-shadow:0 0 28px var(--glow)}
+button:focus-visible{outline:3px solid var(--gold);outline-offset:4px}
+
+/* intro */
+#intro .bud{width:120px;height:120px;margin-bottom:28px;animation:breathe 3.4s ease-in-out infinite;filter:drop-shadow(0 0 22px var(--glow))}
+#intro h1{font:400 clamp(2.6rem,10vw,5.4rem)/1.05 "Pinyon Script","Snell Roundhand",cursive;color:var(--accent);margin:0 0 14px}
+#intro p{font-size:1.4rem;font-style:italic;color:var(--soft);margin:0 0 34px;max-width:26ch}
+@keyframes breathe{50%{transform:scale(1.09) rotate(3deg)}}
+
+/* build-up */
+#buildText{font-size:clamp(1.6rem,5.5vw,2.8rem);font-style:italic;max-width:20ch;line-height:1.3;opacity:0}
+#buildText.in{animation:fio 3.2s ease forwards}
+@keyframes fio{0%{opacity:0;filter:blur(12px);transform:scale(.96)}20%,78%{opacity:1;filter:blur(0);transform:scale(1)}100%{opacity:0;filter:blur(8px);transform:scale(1.03)}}
+
+/* poem scene */
+#spell{position:absolute;top:max(22px,env(safe-area-inset-top,0px));left:0;right:0;display:flex;justify-content:center;gap:clamp(8px,2.4vw,18px)}
+.slot{width:16px;height:16px;border:2px solid var(--soft);border-radius:50%;transition:all .6s;
+  font:400 clamp(2rem,7vw,3rem)/1 "Pinyon Script",cursive;color:var(--accent);opacity:.9}
+.slot.fill{background:var(--accent);border-color:var(--accent);box-shadow:0 0 14px var(--glow);transform:scale(1.25)}
+@keyframes drop{from{transform:translateY(-40px) scale(2);opacity:0}}
+.stagebox{position:relative;display:flex;flex-direction:column;align-items:center}
+.big{
+  position:relative;font-size:clamp(6rem,24vw,11rem);line-height:1;color:var(--accent);
+  text-shadow:0 0 60px var(--glow);opacity:0;
+}
+.big svg{width:1em;height:1em;display:block}
+.big.go{animation:bloom 1.6s cubic-bezier(.2,1.3,.3,1) forwards}
+.big::before,.big::after{content:"";position:absolute;left:50%;top:52%;width:1em;height:1em;margin:-.5em 0 0 -.5em;border-radius:50%;
+  border:2px solid var(--gold);opacity:0}
+.big.go::before{animation:ring 1.8s .2s ease-out}
+.big.go::after{animation:ring 1.8s .6s ease-out}
+@keyframes bloom{0%{opacity:0;transform:scale(.1) rotate(-25deg);filter:blur(20px)}60%{opacity:1;transform:scale(1.15) rotate(3deg);filter:blur(0)}100%{opacity:1;transform:scale(1)}}
+@keyframes ring{0%{opacity:.8;transform:scale(.4)}100%{opacity:0;transform:scale(3.2)}}
+#line{min-height:5.4em;max-width:min(34ch,90vw);font-size:clamp(1.5rem,5vw,2.3rem);line-height:1.35;margin:8px 0 22px}
+.w{display:inline-block;opacity:0;transform:translateY(14px);filter:blur(6px);margin-right:.28em}
+#line.show .w{opacity:1;transform:none;filter:none;transition:all .8s ease}
+.w b{color:var(--accent);font-weight:600}
+#next{opacity:0;visibility:hidden}
+#next.on{opacity:1;visibility:visible;animation:pop .6s both}
+@keyframes pop{from{opacity:0;transform:translateY(12px)}}
+
+/* finale */
+#finale{justify-content:flex-start;overflow-y:auto;padding-top:max(38px,env(safe-area-inset-top,0px))}
+#finale h2{font:400 clamp(3rem,13vw,6.5rem)/1 "Pinyon Script",cursive;color:var(--accent);margin:0 0 6px;text-shadow:0 0 40px var(--glow)}
+#finale .sub{font-size:1.3rem;font-style:italic;color:var(--soft);margin:0 0 22px}
+.card{background:var(--card);backdrop-filter:blur(10px);border-radius:28px;padding:26px clamp(22px,5vw,46px);max-width:min(36ch,92vw);
+  border:1px solid color-mix(in srgb,var(--accent) 40%,transparent);box-shadow:0 0 60px var(--glow)}
+.card p{margin:.9em 0;font-size:clamp(1.25rem,4.2vw,1.7rem);line-height:1.35;text-align:left;opacity:0;transform:translateX(-18px)}
+.card p b{font:400 1.9em/1 "Pinyon Script",cursive;color:var(--accent);margin-right:.04em}
+.card.go p{animation:slide .9s forwards}
+@keyframes slide{to{opacity:1;transform:none}}
+#sig{margin:24px 0 18px;font:400 clamp(1.8rem,6vw,2.6rem) "Pinyon Script",cursive;color:var(--gold);opacity:0}
+#sig.go{animation:pop 1.4s forwards}
+#replay{margin-bottom:30px;opacity:0}
+#replay.go{animation:pop 1s forwards}
+@media (prefers-reduced-motion:reduce){
+  .big.go,.slot.fill span,#intro .bud{animation-duration:.01s;animation-iteration-count:1}
+  .big::before,.big::after{display:none}
+}
+</style>
+</head>
+<body>
+<canvas id="petals" aria-hidden="true"></canvas>
+
+<section class="scene on" id="intro">
+  <svg class="bud" viewBox="0 0 100 100" aria-hidden="true">
+    <g fill="#ff7fae" stroke="#c42d6b" stroke-width="1.5">
+      <path d="M50 14C32 30 30 56 50 78C70 56 68 30 50 14Z"/>
+      <path d="M50 78C26 70 14 48 22 30C40 36 50 56 50 78Z" fill="#f4a6c1"/>
+      <path d="M50 78C74 70 86 48 78 30C60 36 50 56 50 78Z" fill="#f4a6c1"/>
+    </g>
+    <path d="M50 78V96" stroke="#5c9a5a" stroke-width="3" stroke-linecap="round"/>
+  </svg>
+  <h1 id="toLine">For Mom</h1>
+  <p>I made something just for you. Take your time with it.</p>
+  <button id="open">Open your gift</button>
+</section>
+
+<section class="scene" id="build"><div id="buildText" aria-live="polite"></div></section>
+
+<section class="scene" id="poem">
+  <div id="spell" aria-hidden="true"></div>
+  <div class="stagebox">
+    <div class="big" id="big" aria-hidden="true"></div>
+    <div id="line"></div>
+    <button id="next">Next</button>
+  </div>
+</section>
+
+<section class="scene" id="finale">
+  <h2 id="word"></h2>
+  <p class="sub" id="happy">A few words, just for you</p>
+  <div class="card" id="card"></div>
+  <div id="sig"></div>
+  <button id="replay">Read it again</button>
+</section>
+
+<script>
+/* ============ EDIT HERE ============
+   Your poem: one array per verse, and each verse gets its own bloom.
+   Lines inside a verse appear together. */
+const CONFIG = {
+  to: "For Mom",
+  signature: "With all my love",
+  intro: [
+    "Some feelings are too big for one word…",
+    "so I wrote you a few verses instead.",
+    "Take a breath. Slow down.",
+    "Ready?"
+  ],
+  stanzas: [
+    ["Another year has come and finished,", "and you still run the place, undiminished."],
+    ["You’ve turned ordinary days to gold", "with your dinners, reminders, and stories told."],
+    ["On your birthday we’ll get things done,", "but I hope on this day you’ll relax and maybe have some fun."],
+    ["Let the dishes pile up for a day,", "and let someone else take the stress away."],
+    ["Happy birthday, Mom"]
+  ]
+};
+/* =================================== */
+
+const $ = s => document.querySelector(s);
+const scenes = [...document.querySelectorAll('.scene')];
+const go = id => scenes.forEach(s => s.classList.toggle('on', s.id === id));
+const wait = ms => new Promise(r => setTimeout(r, ms));
+const restart = (el, cls) => { el.classList.remove(cls); void el.offsetWidth; el.classList.add(cls); };
+const letters = CONFIG.stanzas;
+const bloom = i => '<svg viewBox="0 0 100 100" style="transform:rotate(' + (i * 23) + 'deg)"><g fill="currentColor" fill-opacity=".88">' +
+  [0, 72, 144, 216, 288].map(a => '<ellipse cx="50" cy="27" rx="13" ry="22" transform="rotate(' + a + ' 50 50)"/>').join('') + '</g><circle cx="50" cy="50" r="9" fill="var(--gold)"/></svg>';
+$('#toLine').textContent = CONFIG.to;
+$('#sig').textContent = CONFIG.signature;
+
+/* ---- falling petals ---- */
+const cv = $('#petals'), cx = cv.getContext('2d');
+const COLORS = ['#f4a6b8','#e8708f','#ffd1d9','#f7c873','#ff8fb8'];
+let W, H, P = [];
+const rnd = (a, b) => a + Math.random() * (b - a);
+function size(){ W = cv.width = innerWidth; H = cv.height = innerHeight; }
+addEventListener('resize', size); size();
+function petal(burst){
+  return { x: rnd(0, W), y: burst ? rnd(-H * .6, -10) : rnd(-H, H), s: rnd(5, 13), v: burst ? rnd(1.5, 3.5) : rnd(.4, 1.3),
+    sw: rnd(0, 6.28), r: rnd(0, 6.28), vr: rnd(-.03, .03), c: COLORS[Math.floor(rnd(0, COLORS.length))], once: !!burst };
+}
+const reduce = matchMedia('(prefers-reduced-motion:reduce)').matches;
+for (let i = 0; i < (reduce ? 8 : 34); i++) P.push(petal());
+function burst(n){ for (let i = 0; i < n; i++) P.push(petal(true)); }
+(function tick(){
+  cx.clearRect(0, 0, W, H);
+  for (let i = P.length - 1; i >= 0; i--) {
+    const p = P[i];
+    p.y += p.v; p.sw += .012; p.x += Math.sin(p.sw) * .7; p.r += p.vr;
+    if (p.y > H + 20) { if (p.once) { P.splice(i, 1); continue; } p.y = -20; p.x = rnd(0, W); }
+    cx.save(); cx.translate(p.x, p.y); cx.rotate(p.r); cx.globalAlpha = .75; cx.fillStyle = p.c;
+    cx.beginPath(); cx.ellipse(0, 0, p.s, p.s * .55, 0, 0, 6.283); cx.fill(); cx.restore();
+  }
+  requestAnimationFrame(tick);
+})();
+
+/* ---- the experience ---- */
+const spell = $('#spell');
+function resetSpell(){
+  spell.innerHTML = '';
+  letters.forEach(() => { const s = document.createElement('div'); s.className = 'slot'; spell.appendChild(s); });
+}
+
+async function buildUp(){
+  go('build');
+  const el = $('#buildText');
+  await wait(900);
+  for (const t of CONFIG.intro) { el.textContent = t; restart(el, 'in'); await wait(3300); }
+  poem();
+}
+
+function showLine(i){
+  const big = $('#big'), line = $('#line'), next = $('#next');
+  line.className = ''; line.innerHTML = ''; next.classList.remove('on');
+  big.innerHTML = bloom(i); restart(big, 'go');
+  spell.children[i].classList.add('fill');
+  next.textContent = i === letters.length - 1 ? 'Reveal the surprise' : 'Next verse';
+  return wait(1700).then(async () => {
+    let k = 0;
+    line.innerHTML = letters[i].map(l => l.trim().split(/\s+/).map(w => '<span class="w" style="transition-delay:' + (k++ * .16) + 's">' + w + '</span>').join('')).join('<br>');
+    void line.offsetWidth; line.classList.add('show');
+    await wait(k * 160 + 900);
+    next.classList.add('on'); next.focus({ preventScroll: true });
+    await new Promise(r => { next.onclick = r; });
+  });
+}
+
+async function poem(){
+  resetSpell(); go('poem');
+  await wait(1200);
+  for (let i = 0; i < letters.length; i++) await showLine(i);
+  finale();
+}
+
+async function finale(){
+  go('finale');
+  $('#word').textContent = CONFIG.to;
+  const card = $('#card'), sig = $('#sig'), rep = $('#replay');
+  [card, sig, rep].forEach(e => e.classList.remove('go'));
+  card.innerHTML = letters.map((s, i) => '<p style="animation-delay:' + (1.2 + i * .7) + 's">' + s.join('<br>') + '</p>').join('');
+  burst(110);
+  await wait(300); void card.offsetWidth; card.classList.add('go');
+  const tail = 1.2 + letters.length * .7 + .8;
+  sig.style.animationDelay = tail + 's'; rep.style.animationDelay = (tail + .8) + 's';
+  sig.classList.add('go'); rep.classList.add('go');
+  await wait(tail * 1000); burst(70);
+}
+
+$('#open').onclick = () => { burst(40); buildUp(); };
+$('#replay').onclick = () => { go('intro'); };
+</script>
+</body>
+</html>
